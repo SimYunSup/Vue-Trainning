@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beginner_Trainning2</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="begin">
+        <div id="app">{{message}}</div>
+
+        <!--v-bind는 '이 요소 속의 title 속성을 Vue 인스턴스의 message 속성으로 최신으로 유지한다'는 뜻을 가진다고 한다.-->
+        <div id="app2">
+            <span v-bind:title="message">이것은 두번째 연습이야!</span>
+        </div>
+
+        <!-- v-if는 따옴표 안이 True일 경우 요소를 보이게 한다.-->
+        <div id="app3">
+            <p v-if="seen">True일 경우 이 문자가 보여요!</p>
+            <!--v-on:[이벤트]="함수"-->
+            <button v-on:click="reverse">그래요?</button>
+        </div>
+
+        <!-- 아마 Array의 요소 수 만큼 반복하는 것 같다.-->
+        <div id="app4">
+            <ol>
+                <li v-for="todo in todos">
+                    {{todo.text}}
+                </li>
+            </ol>
+        </div>
+
+        <div id="app5">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">메시지 뒤집기</button>
+        </div>
+
+        <div id="app6">
+            <p>{{ message }}</p>
+            <input v-model="message">
+        </div>
+
+        <div id="app7">
+            <ol>
+                <!-- 이제 각 todo-item 에 todo 객체를 제공한다 또한 각 구성 요소에 "키"를 제공해야한다-->
+                <todo-item
+                        v-for="item in brain"
+                        v-bind:todo="item"
+                        v-bind:key="item.id">
+                </todo-item>
+            </ol>
+        </div>
+    </div>
+    <a href="./instance.html">다음</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./firstVue.js"></script>
+</body>
+</html>

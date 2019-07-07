@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue instance</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="instance">
+
+        <div id="instance1">
+            <p>{{chg}}</p>
+            <button id="plus">외부 플러스 1</button>
+            <button id="plusAnother">내부 플러스 1</button>
+        </div>
+
+        <div id="instance2">
+            <p>{{foo}}</p>
+            <button v-on:click="foo = 'bazi'">Not Change</button>
+        </div>
+
+        <div id="instance3">
+            <p>{{a}}</p>
+            <p>{{b}}</p>
+            <button id="confirm">확인</button>
+            <p id="correctdata"></p>
+            <p id="correctel"></p>
+        </div>
+
+        <div id="instance4">
+            <p>{{a}}</p>
+        </div>
+    </div>
+    <a href="./totemplate.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./toinstance.js"></script>
+</body>
+</html>

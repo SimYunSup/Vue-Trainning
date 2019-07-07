@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Template</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="template">
+        <div id="template1">
+            <div class="temp">
+                <!-- v-once는 데이터 변경시 업데이트되지 않도록 한다-->
+                <span v-once>변경하지 않습니다 {{a}}</span>
+                <button @click="minusa">a--</button>
+            </div>
+            <div class="temp">
+                <p>{{rawhtml}}</p>
+                <!-- v-html은 텍스트 보간을 html로 해석하도록 한다,-->
+                <p v-html="rawhtml"></p>
+            </div>
+            <div class="temp">
+                <p :id="changeableid">asdf</p>
+            </div>
+            <!-- 이중 중괄호 안에 기본적인 javascript 구문을 넣을 수도 있다.-->
+            <div class="temp">
+            <span>a + 1이다.</span>
+                {{a + 1}}
+            </div>
+            <!-- v-bind:속성 == :속성 v-on:이벤트 == @이벤트 -->
+        </div>
+    </div>
+    <a href="./computed.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./totemplate.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Rendering</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="list">
+        <div id="list1">
+            <ol>
+                <li v-for="item in items">
+                    {{item.message}}
+                </li>
+            </ol>
+        </div>
+
+        <div id="list2">
+            <ol>
+                <li v-for="(item, index) of items">
+                    {{ parentMessage }} - {{index}} - {{ item.message }}
+                </li>
+            </ol>
+        </div>
+
+        <div id="list3">
+            <ul>
+                <li v-for="value in object">
+                    {{value}}
+                </li>
+            </ul>
+        </div>
+
+        <div id="list4">
+            <p v-for="(value, key, index) in object">
+                {{index + 1}}. {{key}}: {{value}}
+            </p>
+        </div>
+        <!-- Vue에서 개별 DOM 노드들을 추적하고 기존 엘리먼트를 재사용, 재정렬하기 위해서 v-for의 각 항목들에 key 속성을 제공해야 합니다. -->
+        <div id="list5">
+            <p v-for="item in items" :key="item.id">
+                {{item.message}}
+            </p>
+            <input type="text" id="plusMessage">
+            <button id="plusArray" @click="plus">추가</button>
+        </div>
+
+        <div id="list6">
+            <p v-for="value in items">
+                {{value.message}}
+            </p>
+            <button @click="match">+1</button>
+        </div>
+
+        <!--
+         == 인식 불가
+        인덱스로 배열에 있는 항목을 직접 설정하는 경우, 예: vm.items[indexOfItem] = newValue
+        배열 길이를 수정하는 경우, 예: vm.items.length = newLength
+        -->
+        <div id="list7">
+            <p v-for="item in items">
+                {{item.message}}
+            </p>
+            <input type="text" id="changeIndex">
+            <input type="text" id="changeMessage">
+            <button @click="change">교체</button>
+        </div>
+
+        <div id="list8">
+            <p v-for="item in items">
+                {{item.message}}
+            </p>
+            <input type="text" id="cutIndex">
+            <button @click="cut">교체</button>
+        </div>
+        <!--
+            Vue 속성을 외부에서 vm.b = 2 같은 형식으로 추가 및 삭제를 감지하지 못한다.
+        -->
+        <div id="list9">
+            <p v-for="(value, key) in info">
+                {{key}}: {{value}}
+            </p>
+            <p>
+                <span>Age: </span>
+                <input type="text" id="plusValue1">
+                <button @click="plus1">추가</button>
+            </p>
+            <p>
+                <span>Location: </span>
+                <input type="text" id="plusValue2">
+                <button @click="plus2">추가</button>
+            </p>
+            <p>
+                <span>major: </span>
+                <input type="text" id="plusValue3">
+                <button @click="plus3">추가</button>
+            </p>
+        </div>
+
+        <div id="list10">
+            <ol>
+                <li v-for="n in numbers">{{ n }}</li>
+            </ol>
+            <ol>
+                <li v-for="n in evenNumbers">{{ n }}</li>
+            </ol>
+        </div>
+
+        <div id="list11">
+            <span v-for="n in 10">{{ n }} </span>
+        </div>
+
+        <div id="list12">
+            <ul>
+                <template v-for="item in items">
+                    <li>{{item.message}}</li>
+                    <li></li>
+                </template>
+            </ul>
+            <input type="text" id="plusList">
+            <button @click="plus">추가</button>
+        </div>
+
+        <div id="list13">
+            <!-- 일부만 렌더링 -->
+            <p>
+                <span v-for="item in items" v-if="item.haveThis">{{ item.message }}  </span>
+            </p>
+            <p>
+                <input type="text" id="enableItem">
+                <button @click="enable">활성화</button>
+            </p>
+            <p>
+                <input type="text" id="disableItem">
+                <button @click="disable">비활성화</button>
+            </p>
+        </div>
+
+        <div id="list14">
+            <!-- v-if 먼저 -->
+            <p v-if="items.length">
+                <span v-for="item in items">{{item}}  </span>
+            </p>
+            <p v-else>No one left</p>
+            <button @click="pop">pop</button>
+        </div>
+
+        <div id="list15">
+            <input
+                    v-model="newItemText"
+                    v-on:keyup.enter="addNewItems"
+                    placeholder="Add a item"
+            >
+            <ul>
+                <!-- is 속성을 보면 li 태그는 ul 안에서만 유효하다고 한다.-->
+                <li
+                        is="my-item"
+                        v-for="(item, index) in items"
+                        v-bind:key="item.id"
+                        v-bind:title="item.title"
+                        v-on:remove="item.splice(index, 1)"
+                ></li>
+            </ul>
+        </div>
+    </div>
+    <a href="eventhandle.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./list.js"></script>
+    <link rel="stylesheet" href="./tobinding.css">
+</body>
+</html>

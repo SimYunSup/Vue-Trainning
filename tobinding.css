@@ -1,0 +1,11 @@
+.underline{
+    text-decoration-line: underline;
+}
+
+.textRed{
+    color: red;
+}
+
+.bigFont{
+    font-size: 50px;
+}

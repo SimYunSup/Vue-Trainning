@@ -1,0 +1,15 @@
+.begin {
+    width:300px;
+}
+div > div {
+    border: gray 1px solid;
+    margin:20px;
+    text-align: center;
+}
+#temp{
+    border: red 1px solid;
+}
+.temp{
+    border: black 1px solid;
+    margin: 20px;
+}

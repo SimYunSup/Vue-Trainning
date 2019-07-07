@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Conditional Rendering</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="conditional">
+        <div id="cond1">
+            <h1 v-if="showThis">Can you see this?</h1>
+            <h1 v-else>Or you can see this.</h1>
+            <button @click="toggleThis">활성화</button>
+        </div>
+
+        <div id="cond2">
+            <template v-if="showA">
+                <h1>You can see this if it is A.</h1>
+                <button @click="toggleB">B</button>
+            </template>
+            <template v-else-if="showB">
+                <h1>You can see this if it is B.</h1>
+                <button @click="toggleC">C</button>
+            </template>
+            <template v-else-if="showC">
+                <h1>You can see this if it is C.</h1>
+                <button @click="toggle">Not</button>
+            </template>
+            <template v-else>
+                <h1>You can't see me.</h1>
+                <button @click="toggleA">A</button>
+            </template>
+        </div>
+
+        <div id="cond3NoKey">
+            <template v-if="loginType === 'username'">
+                <label>사용자 이름</label>
+                <input placeholder="사용자 이름을 입력하세요">
+            </template>
+            <template v-else>
+                <label>이메일</label>
+                <input placeholder="이메일 주소를 입력하세요">
+            </template>
+            <button @click="toggleThis">유형 변경</button>
+        </div>
+
+        <div id="cond3">
+            <!-- 트랜지션할 때마다 전체 렌더링하게 만들기 위해 key값을 부여한다, 안하면 속성이 내용만 바뀐다.-->
+            <template v-if="loginType === 'username'">
+                <label>사용자 이름</label>
+                <input placeholder="사용자 이름을 입력하세요" key="username-input">
+            </template>
+            <template v-else>
+                <label>이메일</label>
+                <input placeholder="이메일 주소를 입력하세요" key="email-input">
+            </template>
+            <button @click="toggleThis">유형 변경</button>
+        </div>
+
+        <!--
+            v-if는 조건부 블럭 안의 내용에 따라 제거되고 만들어지지만 v-show는 CSS 속성으로 감추고 보여준다.
+            v-if는 toggle시 비용이 높고 v-show는 초기 렌더링 비용이 높다.
+        -->
+        <div id="cond4">
+            <p v-if="ok">v-if</p>
+            <p v-show="ok">v-show</p>
+            <button @click="isOk">활성화</button>
+        </div>
+        <!-- v-for는 v-if보다 우선순위를 갖는다고 한다 -->
+    </div>
+    <a href="list.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./ifelse.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class and style binding</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="binding">
+        <div class="bindingclass1" :class="{underline : isActive}">
+            <p>inline class binding</p>
+            <button @click="activation">활성화</button>
+        </div>
+
+        <div class="bindingclass2" :class="objectClassBind">
+            <p>Object class binding</p>
+            <button @click="activation">활성화</button>
+        </div>
+
+        <div class="bindingclass3" :class="objectClassBind">
+            <p>method class binding</p>
+            <button @click="activation">활성화</button>
+        </div>
+
+        <div class="bindingclass4" :class="[objectClassBind, red]">
+            <p>array class binding</p>
+            <button @click="activation">활성화</button>
+        </div>
+
+        <div class="bindingclass5">
+            <bigfont class="bindingclass5 textRed" :class="objectClassBind"></bigfont>
+            <button @click="activation">활성화</button>
+        </div>
+
+        <div class="bindingstyle1" :style="styleObject">
+            <p>inline object style binding</p>
+        </div>
+
+        <div class="bindingstyle2" :style="[baseStyles, plusStyles]">
+            <p>inline array style binding</p>
+        </div>
+
+        <div class="bindingstyle3" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+            <p>브라우저가 지원하는 배열의 마지막 값만 렌더링합니다.</p>
+        </div>
+    </div>
+    <a href="ifelse.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./tobinding.js"></script>
+    <link rel="stylesheet" href="./tobinding.css">
+</body>
+</html>

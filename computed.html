@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computed and watch</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="computed">
+        <div id="computed">
+            <p>{{fullName}}</p>
+            <p>{{firstName}}</p>
+            <p>{{lastName}}</p>
+            <button @click="fullName = 'Sim yunsup'">전체 바꾸기</button>
+            <button @click="firstName = 'Shim'">성 바꾸기</button>
+            <button @click="lastName = 'yeonsup'">이름 바꾸기</button>
+        </div>
+
+        <div id="watch">
+            <p>{{fullName}}</p>
+            <p>{{firstName}}</p>
+            <p>{{lastName}}</p>
+            <button @click="fullName = 'Shim yeonsup'">전체 바꾸기</button>
+            <button @click="firstName = 'Sim'">성 바꾸기</button>
+            <button @click="lastName = 'yunsup'">이름 바꾸기</button>
+        </div>
+    </div>
+    <a href="./binding.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./computed.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Event Handler</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+</div>
+    <div class="handle">
+        <div id="handle1">
+            <button @click="counter += 1">Plus 1</button>
+            <p>버튼을 클릭한 횟수는 {{ counter }} 번 입니다.</p>
+        </div>
+
+        <div id="handle2">
+            <input type="text" v-model="name">
+            <button @click="greet">Greet</button>
+        </div>
+
+        <div id="handle3">
+            <input type="text" v-model="message">
+            <button @click="say(message)">Say</button>
+        </div>
+
+        <div id="handle4">
+            <form action="">
+                <input type="text" v-model="message">
+                <button type="submit" @click="warn('$event 변수를 통해 event에 접근할 수 있다', $event)">submit</button>
+            </form>
+        </div>
+
+        <div id="handle5">
+            <div @click="show1">
+                <div @click.stop="show2">클릭 이벤트 상위로의 전파가 중단된다.(stopPropagation)</div>
+            </div>
+
+            <form @submit.prevent action="index.html">
+                <label for="handleSubmit">단순 수식어만 사용할 수도 있다.</label>
+                <p><input type="text" id="handleSubmit"></p>
+                <button type="submit">제출 이벤트가 페이지를 다시 로드 하지 않습니다(preventDefault)</button>
+            </form>
+
+            <div @click="show1">
+                <a href="./index.html" @click.stop.prevent="show2">수식어는 체이닝 가능합니다</a>
+            </div>
+
+            <!-- 이벤트 리스너를 추가할 때 캡처모드를 사용합니다 -->
+            <div @click.capture="show1">
+                <div @click="show2">내부 엘리먼트를 대상으로 하는 이벤트가 해당 엘리먼트에서 처리되기 전에 여기서 처리합니다. </div>
+            </div>
+
+            <!-- event.target이 엘리먼트 자체인 경우에만 트리거를 처리합니다 -->
+            <!-- 자식 엘리먼트에서는 안됩니다 -->
+            <div @click.self="show1">
+                <div @click.prevent.self>
+                    <a href="./eventhandle.html">v-on:click.prevent.self를 사용하면 모든 클릭을 막을 수 있다.</a>
+                </div>
+                <div @click.self.prevnet>
+                    <a href="./index.html">v-on:click.self.prevent는 엘리먼트 자체에 대한 클릭만 방지한다.</a>
+                </div>
+            </div>
+
+            <div>
+                <a @click.once="show1">2.1.4에 새로 추가되었고 클릭이벤트가 최대 한번 발동한다.</a>
+            </div>
+
+            <div @scroll.passive>
+                스크롤의 기본이벤트를 취소할 수 없다고 한다.
+                <p>추가로, Vue는 .passive 수식어를 제공합니다. 특히 모바일 환경에서 성능향상에 도움이 됩니다. 예를 들어, 브라우저는 핸들러가 event.preventDefault()를 호출할지 알지 못하므로 프로세스가 완료된 후 스크롤 합니다. .passive 수식어는 이 이벤트가 기본 동작을 멈추지 않는다는 것을 브라우저에 알릴 수 있습니다.</p>
+            </div>
+
+            <div>
+                <ol>
+                    <li v-for="msg in type">
+                        {{msg}}
+                    </li>
+                </ol>
+                <button @click="showkeyup">이외에도 Vue.config.keyCodes.이름 = keyCode 으로 사용자 별칭을 만들 수 있다.</button>
+                <p><input type="text" @keyup.13="show1" placeholder="enter"></p>
+                <p><input type="text" @keyup.up.13="show1" placeholder="up or enter"></p>
+                <label for="page">KeyboardEvent.key를 통해 노출된 유효 키 이름을 수식어로 직접 사용할 수 있다고 한다.</label>
+                <p><input type="text" id="page" v-model="message" @keyup.page-up="clear" placeholder="page up"></p>
+                <p><input type="text" v-model="message" @click.ctrl="clear" placeholder="Ctrl + click"></p>
+                <button @click="showPlus1">2.1.0+ 추가, 여기서 추가된 것들은 동시에 눌러야만 발동된다.</button>
+                <p>
+                    <button @click.ctrl.exact="show1">Ctrl만 눌려있을 때 클릭해야 발동된다.</button>
+                    <button @click.ctrl="show1">다른 키와 Ctrl이 눌려있을 때 클릭해도 발동된다.</button>
+                </p>
+                <button @click.exact="showPlus2">2.2.0 추가, 마우스 관련이다.</button>
+            </div>
+        </div>
+        <!--
+            다음과 같은 이유때문에 html에서 리스너를 추가한다고 한다.
+            1.HTML 템플릿을 간단히 하여 JavaScript 코드 내에서 핸들러 함수 구현을 찾는 것이 더 쉽습니다.
+
+            2.JavaScript에서 이벤트 리스너를 수동으로 연결할 필요가 없으므로 ViewModel 코드는 순수 로직과 DOM이 필요하지 않습니다. 이렇게 하면 테스트가 쉬워집니다.
+
+            3. ViewModel이 파기되면 모든 이벤트 리스너가 자동으로 제거 됩니다. 이벤트 제거에 대한 걱정이 필요 없어집니다.
+        -->
+    </div>
+    <a href="formbind.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./tohandle.js"></script>
+</body>
+</html>
