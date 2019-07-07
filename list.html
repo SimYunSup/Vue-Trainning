@@ -148,7 +148,7 @@
         <div id="list15">
             <input
                     v-model="newItemText"
-                    v-on:keyup.enter="addNewItems"
+                    @keyup.enter="addNewItems"
                     placeholder="Add a item"
             >
             <ul>
@@ -156,9 +156,9 @@
                 <li
                         is="my-item"
                         v-for="(item, index) in items"
-                        v-bind:key="item.id"
-                        v-bind:title="item.title"
-                        v-on:remove="item.splice(index, 1)"
+                        :key="item.id"
+                        :title="item.title"
+                        @remove="item.splice(index, 1)"
                 ></li>
             </ul>
         </div>
