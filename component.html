@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component</title>
+    <link rel="stylesheet" href="./basic.css">
+</head>
+<body>
+    <div class="component">
+        <div id="comp1">
+            <my-component></my-component>
+            <local-component></local-component>
+        </div>
+
+        <div id="comp2">
+            <p>다음 소스 중 하나에 포함되면 문자열 템플릿을 사용하는 경우에는 이러한 제한 사항이 적용되지 않는다.</p>
+            <ol>
+                <li is="rule-comp" v-for="(rule, index) in rules" :rule="rule" :key="index"></li>
+            </ol>
+        </div>
+
+        <div id="comp3">
+            <counter1></counter1>
+            <counter1></counter1>
+            <p></p>
+            <counter2></counter2>
+            <counter2></counter2>
+        </div>
+
+        <div id="comp4">
+            <passive0 message="정적인 props이다."></passive0>
+            <passive1 my-message="HTML 속성은 대소 문자를 구분하지 않으므로 kabab-case, Javascript는 camelCase를 사용"></passive1>
+            <input type="text" v-model="message">
+            <active :active-message="message"></active>
+            <item v-bind="item"></item>
+            <!--이 prop는 초기 값을 전달 하는데만 사용되며 하위 컴포넌트는 이후에 이를 로컬 데이터 속성으로 사용하기만 합니다. -->
+            <input type="text" v-model.number="initialNumber">
+            <counter v-if="initialNumber" :initial-counter="initialNumber"></counter>
+            <p></p>
+            <!-- prop는 변경되어야 할 원시 값으로 전달됩니다. -->
+            <input type="text" v-model="text">
+            <origin :text="text"></origin>
+
+            <p>A: <input type="text" v-model.number.lazy="checkNumber"></p>
+            <p>B.string: <input type="text" v-model.lazy="checkMulti"></p>
+            <p>B.number: <input type="text" v-model.number.lazy="checkMulti"></p>
+            <p>C: <input type="text" v-model.lazy="checkString"></p>
+            <p>F: <input type="text" v-model.lazy="checkUser"></p>
+            <check :prop-a="checkNumber"
+                   :prop-b="checkMulti"
+                   :prop-c="checkString"
+                   :prop-f="checkUser"></check>
+        </div>
+    </div>
+    <a href="component.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./tocomponent.js"></script>
+    <link rel="stylesheet" href="./tobinding.css">
+</body>
+</html>
