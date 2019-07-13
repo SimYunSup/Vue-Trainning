@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>component</title>
     <link rel="stylesheet" href="./basic.css">
+    <link rel="stylesheet" href="./tocomponent.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <div class="component">
@@ -51,10 +53,90 @@
                    :prop-c="checkString"
                    :prop-f="checkUser"></check>
         </div>
+
+        <div id="comp5">
+            <!-- HTML에서 지정한 clss > template에서 지정한 class -->
+            <no-props-input class="textRed overline" disabled></no-props-input>
+            <p></p>
+            <p>{{ totalCounter }}</p>
+            <counter-plus @increase="increaseTotal"></counter-plus>
+            <counter-plus @increase="increaseTotal"></counter-plus>
+            <!-- .native는 네이티브 이벤트(아마 메소드)를 수신한다고 한다. -->
+            <counter-minus @click.native="decreaseTotal"></counter-minus>
+            <p></p>
+            <!-- .sync를 통해 양방향 데이터 통신을 할 수 있다. 다음은 :initial-counter="initialNumber" @update:value="initialNumber = $event" 이며 이는 자식 컴포넌트로 부터 데이터를 전달받는 것이다.-->
+            <input type="text" v-model.number="initialNum">
+            <counter-sync :initial-counter.sync="initialNum"></counter-sync>
+            <!--
+            아래 v-model="number"은
+            :value="number" @input="value => number = value" 이다.
+            -->
+            <p><number v-model="number"></number></p>
+            <checkbox v-model="checking" value="check box"></checkbox>
+            {{checking}}
+        </div>
+
+        <div id="comp6">
+            <!--
+            부모 템플릿에서 하위 속성/메소드에 디렉티브를 바인딩하지 못한다.
+            (여기서 v-show="컴포넌트에 있는 데이터"로 바인딩하고자 하면 오류 뜬다.)
+            -->
+            <show-correct></show-correct>
+            <p></p>
+            <single-slot></single-slot>
+            <single-slot><p>asdf</p></single-slot>
+
+            <named-slot>
+                <h4 slot="header">name이 header인 slot에 들어간다.</h4>
+                <p>아무 이름 없는 slot에 들어간다. 없다면 삭제된다.</p>
+                <h5 slot="footer">name이 footer인 slot에 들어간다.</h5>
+            </named-slot>
+            <!--
+            재사용 가능하고 template 엘리먼트으로 작동하는 특별한 유형의 슬롯이다.
+             slot-scope의 값은 자식으로부터 전달 된 props 객체를 담고있는 임시 변수의 이름을 정하는 것 같다
+             -->
+            <scope-slot>
+                <template slot-scope="props">
+                    <p>Parent Message by template</p>
+                    <p>{{props.text}}</p>
+                    <p>{{props}}</p>
+                </template>
+            </scope-slot>
+
+            <li-slot :items="items">
+                <li
+                    slot="item"
+                    slot-scope="props">
+                    {{props.text}}
+                </li>
+            </li-slot>
+            <!-- 구조 분해(destructuring)을 통해 객체 안의 property를 사용할 수 있다.-->
+            <scope-slot>
+                <span slot-scope="{ text }">{{ text }}</span>
+            </scope-slot>
+        </div>
+
+        <div id="comp7">
+            <component :is="currentComponent"></component>
+            <button @click="currentComponent = 'single-slot'">single</button>
+            <button @click="currentComponent = 'named-slot'">named</button>
+            <button @click="currentComponent = 'scope-slot'">scope</button>
+
+            <!-- 트랜지션된 컴포넌트를 메모리에 유지하여 상태를 보존하거나 다시 렌더링하지 않게 하기 위해 <keep-alive> 엘리먼트를 사용한다. -->
+            <keep-alive>
+                <component :is="currentComponent"></component>
+            </keep-alive>
+        </div>
+
+        <div id="comp8">
+            <parent-ref ref="childComp"></parent-ref>
+
+            <async-time></async-time>
+
+        </div>
     </div>
-    <a href="component.html">다음</a>
+    <a href="slot.html">다음</a>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="./tocomponent.js"></script>
-    <link rel="stylesheet" href="./tobinding.css">
 </body>
 </html>

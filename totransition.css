@@ -1,0 +1,87 @@
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+    /*transition: [transtion-property(전환 적용되는 속성)] [transition-duration] [transition-timing-function] [transition-delay]*/
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active (version 2.1.8 이하 일 경우) */ {
+    opacity: 0;
+}
+/*
+-트랜지션 속 4(6)가지 클래스
+    v-enter: enter 시작
+    v-enter-active: enter 활성화부터 종료 전(element 삽입)까지
+    v-enter-to: element 삽입 후
+    v-leave: leave 시작
+    v-leave-active: leave 활성화부터 종료 전(진출 트랜지션?)까지
+    v-leave-to: 진출 트랜지션 후
+ */
+
+.slide-fade-enter-active {
+    transition: all .3s ease;
+}
+.slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.1, 0.8, 1.0); /* https://kutar37.tistory.com/entry/CSS-cubic-bezier%EB%9E%80 */
+}
+.slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active (version 2.1.8 이하) */ {
+    transform: translateX(100px); /* (해당 클래스가 되었을 때)바꿈: 이동되는 X 위치 */
+    opacity: 0;
+}
+
+.bounce-enter-active {
+    animation: bounce-in .5s; /*animation도 transiton과 비슷하나 몇개가 더 추가된다.*/
+}
+.bounce-leave-active {
+    animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+    0% { /*=from*/
+        transform: scale(0); /*아마 크기 조절*/
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% { /*=to*/
+        transform: scale(1);
+    }
+}
+
+
+.comp-fade-enter-active, .comp-fade-leave-active {
+    transition: opacity .3s ease;
+}
+.comp-fade-enter, .comp-fade-leave-to
+    /* .component-fade-leave-active 2.1.8 미만 버전일시 */ {
+    opacity: 0;
+}
+
+/*
+    list-item에 transition: all 1s를 값을 넣고
+    list-enter/leave-active에 있던 transition: all 1s을 빼고 list-leave-active에 position: absolute를 부여했다.
+    이를 통해 더욱 자연스러운 애니메이션이 되었다.
+*/
+.list-item {
+    transition: all 1s;
+    display: inline-block; /* FLIP은 inline에서 작동하지 않는다고 한다.*/
+    margin-right: 10px;
+}
+.list-leave-active {
+    position: absolute; /* 부모 element에 관련하여 배치됨 */
+}
+.list-enter, .list-leave-to /* .list-leave-active */ {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.listbox-item {
+    display: inline-block;
+    justify-content: space-around;
+    border: 1px gray solid;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+.listbox-move { /* 아이템이 위치를 바꿀 때 v-move 클래스를 조정해서 변화를 조정하거나 move-class 속성를 통해 다른 CSS와 연결할 수 있다.*/
+    transition: transform 0.5s;
+}

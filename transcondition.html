@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transition Condition</title>
+    <link rel="stylesheet" href="./basic.css">
+    <link rel="stylesheet" href="./totranscondition.css">
+</head>
+<body>
+    <!-- tween.js를 사용했다고 한다. -->
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+    <div id="count-number">
+        <input v-model.number="number" type="number" step="20">
+        <count-number
+                :value="number"
+        ></count-number>
+    </div>
+    <!-- tween.js와 color.js를 사용하였다. -->
+    <script src="https://cdn.jsdelivr.net/npm/color-js@1.0.3"></script>
+    <div id="search-color">
+        <input
+                v-model="colorQuery"
+                @keyup.enter="updateColor"
+                placeholder="Enter a color"
+        >
+        <button @click="updateColor">Update</button>
+        <p>Preview:</p>
+        <span
+                :style="{ backgroundColor: tweenedCSSColor }"
+                class="search-color-preview"
+        ></span>
+        <p>{{ tweenedCSSColor }}</p>
+    </div>
+
+
+    <a href="transcondition.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./totranscondition.js"></script>
+</body>
+</html>

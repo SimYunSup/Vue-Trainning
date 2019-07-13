@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component Slot</title>
+    <link rel="stylesheet" href="./basic.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="slot">
+        <div id="slot1">
+            <navigation-link url="./component.html">
+                {{url}} <!-- undefined -->
+                부모 템플릿 안에 있는 것들은 부모 컴포넌트의 범위에 컴파일되고 자식 템플릿 안에 있는 것들은 자식 컴포넌트의 범위에 컴파일됩니다.
+            </navigation-link>
+
+            <named-slot>
+                <template v-slot:header>
+                    <h4>name이 header인 slot에 들어간다.</h4>
+                    <h5>#header으로 표기해도 된다.</h5>
+                    <h6>component에서와 다르게 slot="이름"이 아니라 v-slot:이름 으로 바뀌었다.</h6>
+                </template>
+                <template>
+                    <h4>아무 이름 없는 slot(자동으로 default값이 적용된다.)에 들어간다. 없다면 삭제된다.</h4>
+                    <h5>v-slot:default또는 #default을 표시해도 된다.</h5>
+                    <h6>만약 template이 여러개라면 가장 아래에 있는 템플릿이 적용된다.</h6>
+                </template>
+                <template v-slot:footer>
+                    <h5>name이 footer인 slot에 들어간다.</h5>
+                    <h6>역시 #footer으로 표현해도 된다.</h6>
+                </template>
+            </named-slot>
+
+            <scope-slot>
+                <!-- slot이 단일이면 v-slot:default는 v-slot으로 축약할 수 있다. -->
+                <template v-slot="slotProps">
+                    <p>First name(slotProps.user.firstName): {{slotProps.user.firstName}}</p>
+                    <p>Age: {{slotProps.user.age}}</p>
+                </template>
+            </scope-slot>
+            <scope-slot></scope-slot>
+            <!-- 디스트럭쳐링 -->
+            <scope-slot>
+                <template v-slot="{user}">
+                    user.firstName: {{user.firstName}}
+                </template>
+            </scope-slot>
+            <scope-slot>
+                <template v-slot="{user: person}">
+                    person.firstName: {{person.firstName}}
+                </template>
+            </scope-slot>
+            <scope-slot>
+                <template v-slot="{customUser}">
+                    {{customUser}}
+                </template>
+            </scope-slot>
+            <scope-slot>
+                <template v-slot="{customUser = {firstName: 'Guest'}}">
+                    {{customUser.firstName}}
+                </template>
+            </scope-slot>
+
+            <named-slot>
+                <template v-slot:[dynamicslotname]>
+                    가변 슬롯 이름 테스트
+                    <button @click="changeHeader">header</button>
+                    <button @click="changeDefault">default</button>
+                    <button @click="changeFooter">footer</button>
+                </template>
+            </named-slot>
+        </div>
+    </div>
+    <a href="transition.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./toslot.js"></script>
+</body>
+</html>
