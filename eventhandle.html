@@ -54,10 +54,10 @@
             <!-- 자식 엘리먼트에서는 안됩니다 -->
             <div @click.self="show1">
                 <div @click.prevent.self>
-                    <a href="./eventhandle.html">v-on:click.prevent.self를 사용하면 모든 클릭을 막을 수 있다.</a>
+                    <a href="./eventhandle.html" @click="show3">v-on:click.prevent.self를 사용하면 모든 클릭을 막을 수 있다.</a>
                 </div>
-                <div @click.self.prevnet>
-                    <a href="./index.html">v-on:click.self.prevent는 엘리먼트 자체에 대한 클릭만 방지한다.</a>
+                <div @click.self.prevent>
+                    <a href="./eventhandle.html" @click="show3">v-on:click.self.prevent는 엘리먼트 자체에 대한 클릭만 방지한다.</a>
                 </div>
             </div>
 

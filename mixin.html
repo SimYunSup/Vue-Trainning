@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Mixin</title>
+    <link rel="stylesheet" href="./basic.css">
 </head>
 <body>
-$END$
+    <div class="mixin">
+        <div id="mixin1">
+            <p v-for="item in array">
+                {{item}}
+            </p>
+        </div>
+
+        <div id="mixin2">
+            <!--
+                methods,components,directives와 같은 객체 값을 요구하는 옵션은 같은 객체에 병합된다.
+                Vue.extend에서도 같다
+                 -->
+            <p v-for="item in array">
+                {{item}}
+            </p>
+            <button @click="air">1</button>
+            <button @click="pot">2</button>
+            <button @click="conflicting">3</button>
+        </div>
+    </div>
+    <a href="directive.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./tomixin.js"></script>
 </body>
 </html>

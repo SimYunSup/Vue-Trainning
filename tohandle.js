@@ -58,6 +58,9 @@ var handle5 = new Vue({
         show2: function () {
             alert('2')
         },
+        show3: function() {
+            alert('3')
+        },
         showkeyup: function() {
             this.type.push('.enter', '.delete(backspace도 포함됨)', '.tab', '.esc', '.space', '.up', '.down', '.left', '.down')
         },

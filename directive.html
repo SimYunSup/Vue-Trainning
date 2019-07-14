@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>User Directive</title>
+    <link rel="stylesheet" href="./basic.css">
 </head>
 <body>
-$END$
+    <div class="direct">
+        <div id="direct1">
+            <button v-click @click="show= !show" v-if="show">버튼</button>
+            <input type="text" v-focuson>
+        </div>
+
+        <div id="direct2">
+            <div id="text-direct"></div>
+            <div id="text-info"></div>
+            <button @click="show = !show">show</button>
+            <p>{{show}}</p>
+            <div v-hook:show.abc.de="show"></div>
+            <div v-hook:sw.a="{mental: 'broken', text: 'asdf'}"></div>
+        </div>
+    </div>
+    <a href="render.html">다음</a>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./todirective.js"></script>
 </body>
 </html>
